@@ -42,16 +42,28 @@ def is_valid_url(url):
 def parse_input_data(file_path):
     items = []
     with open(file_path, 'r', encoding='utf-8') as f:
+        # Skip header row
+        next(f)
         for line in f:
-            parts = line.strip().split('\t')
-            if len(parts) == 3:
-                ebay_id, title, urls = parts
-                urls = urls.strip('"').split('|')
-                items.append({
-                    'ebay_id': ebay_id,
-                    'title': title.strip('"'),
-                    'image_urls': urls
-                })
+            try:
+                # Split by comma but handle quoted fields properly
+                parts = line.strip().split(',')
+                if len(parts) >= 7:  # Ensure we have at least 7 columns
+                    ebay_id = parts[0].strip('"')
+                    title = parts[5].strip('"')
+                    url = parts[6].strip('"')
+                    
+                    # Only add if we have a valid URL
+                    if url and url.startswith('http'):
+                        items.append({
+                            'ebay_id': ebay_id,
+                            'title': title,
+                            'image_urls': [url]
+                        })
+            except Exception as e:
+                print(f"Error processing line: {line.strip()}")
+                print(f"Error details: {str(e)}")
+                continue
     return items
 
 def process_items(items):

@@ -1,0 +1,19 @@
+# Input data files
+input_data.csv
+input_data.txt
+
+# Downloaded images directory
+ebay_items/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+ebay_env/
+.env
+
+# IDE
+.vscode/
+.idea/

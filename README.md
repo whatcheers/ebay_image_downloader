@@ -1,5 +1,13 @@
 # eBay Image Downloader
 
+> **❤️ Support This Project**
+> 
+> If you find this tool helpful, consider buying me a coffee:
+> 
+> [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/dbsurplussolutions)
+>
+> Your support helps maintain and improve this tool. Thank you!
+
 A Python script to download images from eBay listings based on CSV input data.
 
 ## Features

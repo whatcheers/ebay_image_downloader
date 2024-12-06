@@ -94,10 +94,22 @@ def process_items(items):
         for future in as_completed(download_tasks):
             future.result()
 
-# Parse the input data
-items = parse_input_data('input_data.txt')
+def main():
+    # Get the current directory
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    input_file = os.path.join(current_dir, 'input_data.csv')
+    
+    if not os.path.exists(input_file):
+        print(f"Error: Input file '{input_file}' not found")
+        return
 
-# Process items and download images
-process_items(items)
+    items = parse_input_data(input_file)
+    if not items:
+        print("No valid items found in input file")
+        return
 
-print("Download process completed.")
+    process_items(items)
+    print("Download process completed.")
+
+if __name__ == "__main__":
+    main()
